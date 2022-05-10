@@ -18,7 +18,6 @@ contract Donation {
 
   function pay() external payable {
     require(msg.value > 0, "Donation must be greater than 0");
-
     if (Donations[msg.sender] == 0) {
       donaters.push(msg.sender);
     }
@@ -31,7 +30,6 @@ contract Donation {
 
   function donatorContribution(address _targetAddr) external view returns (uint) {
     require(Donations[_targetAddr] != 0, "There were no donations from this address");
-
     return Donations[_targetAddr];
   }
 
@@ -41,7 +39,6 @@ contract Donation {
 
   function withdraw(address payable _targetAddr, uint _amount) external payable onlyOwner {
     require(_amount <= address(this).balance, "Not enough currency");
-    
     _targetAddr.transfer(_amount);
   }
 }
