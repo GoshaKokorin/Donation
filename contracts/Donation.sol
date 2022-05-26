@@ -41,4 +41,11 @@ contract Donation {
     require(_amount <= address(this).balance, "Not enough currency");
     _targetAddr.transfer(_amount);
   }
+
+  receive() external payable {
+    if (Donations[msg.sender] == 0) {
+      donaters.push(msg.sender);
+    }
+    Donations[msg.sender] += msg.value;
+  }
 }
